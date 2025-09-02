@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Meer Technical University - Complete Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-blue: #0d6efd;
+            --dark-blue: #0a58ca;
+            --light-blue: #e8f2ff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: white !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            margin-top: 76px;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-blue);
+            margin-top: 15px;
+        }
+        
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-blue);
+            border-color: var(--dark-blue);
+        }
+        
+        .admin-panel {
+            background: linear-gradient(45deg, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .login-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .dashboard-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .dashboard-card-1 { background: linear-gradient(45deg, #3498db, #2c3e50); }
+        .dashboard-card-2 { background: linear-gradient(45deg, #2ecc71, #3498db); }
+        .dashboard-card-3 { background: linear-gradient(45deg, #e74c3c, #2ecc71); }
+        .dashboard-card-4 { background: linear-gradient(45deg, #f39c12, #e74c3c); }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .marksheet {
+            background: white;
+            border: 2px solid #000;
+            padding: 30px;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .marksheet-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
+        }
+        
+        .marksheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .marksheet-table th, .marksheet-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .admission-steps {
+            counter-reset: step;
+        }
+        
+        .admission-steps .step {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+        }
+        
+        .admission-steps .step:before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 45px;
+            height: 45px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .admin-only {
+            display: none;
+        }
+        
+        .admin-login-link {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">SMTU</div>
+                <a class="navbar-brand" href="#">
+                    Sai Meer Technical University
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('about')">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('academics')">Academics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('admission')">Admission</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('results')">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('contact')">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link admin-login-link" href="#" onclick="showSection('admin-login')"><i class="bi bi-shield-lock"></i> Admin</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary" href="#" onclick="showSection('student-login')">Student Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home-section">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="container text-center">
+                <h1 class="display-4 fw-bold mb-4">Welcome to Sai Meer Technical University</h1>
+                <p class="lead mb-5">Where innovation meets excellence in technical education</p>
+                <a href="#" class="btn btn-light btn-lg px-5 py-3 fw-bold" onclick="showSection('admission')">Apply Now</a>
+            </div>
+        </div>
+
+        <!-- News & Updates -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center">News & Updates</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">Admission</span>
+                                <h4>Admissions Open for 2023-2024</h4>
+                                <p>Online admission process for the academic year 2023-2024 is now open. Apply before June 30, 2023.</p>
+                                <a href="#" class="btn btn-sm btn-outline-primary" onclick="showSection('admission')">Apply Now</a>
+                                <button class="btn btn-sm btn-outline-secondary admin-only" onclick="editNews(1)">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">Results</span>
+                                <h4>Semester Results Published</h4>
+                                <p>Results for Winter Semester 2023 have been published. Students can check their results online.</p>
+                                <a href="#" class="btn btn-sm btn-outline-primary" onclick="showSection('results')">Check Results</a>
+                                <button class="btn btn-sm btn-outline-secondary admin-only" onclick="editNews(2)">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4 admin-only">
+                    <button class="btn btn-primary" onclick="addNews()">Add News</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academic Programs -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="section-title text-center">Academic Programs</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-cpu-fill display-4 text-primary mb-3"></i>
+                                <h4>Computer Science</h4>
+                                <p>B.Tech, M.Tech, and Ph.D. programs in Computer Science and Engineering</p>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-lightning-charge-fill display-4 text-primary mb-3"></i>
+                                <h4>Electrical Engineering</h4>
+                                <p>Programs in Electrical, Electronics, and Telecommunications Engineering</p>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-gear-fill display-4 text-primary mb-3"></i>
+                                <h4>Mechanical Engineering</h4>
+                                <p>Mechanical, Automotive, and Robotics Engineering programs</p>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campus Life -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center">Campus Life</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="https://images.unsplash.com/photo-1582573618381-c9a77c31f6b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Labs">
+                            <div class="card-body">
+                                <h4>Advanced Laboratories</h4>
+                                <p>Our state-of-the-art labs provide hands-on experience with cutting-edge technology.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Hostel">
+                            <div class="card-body">
+                                <h4>Student Hostels</h4>
+                                <p>Comfortable and secure accommodation with all modern amenities for students.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="https://images.unsplash.com/photo-1535131749006-b7f58c990ff3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Sports">
+                            <div class="card-body">
+                                <h4>Sports Complex</h4>
+                                <p>Olympic-standard sports facilities including swimming pool, track, and indoor stadium.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Other Sections (About, Academics, etc.) -->
+    <section id="about-section" class="py-5" style="display: none; margin-top: 100px;">
+        <div class="container">
+            <h2 class="section-title">About Sai Meer Technical University</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Our History</h3>
+                    <p>Established in 1998, Sai Meer Technical University has been at the forefront of technical education for over two decades. We have grown from a small engineering college to a full-fledged technical university with over 10,000 students.</p>
+                    <p>Our alumni have gone on to work at leading tech companies around the world, contributing to innovation and technological advancement.</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Vision & Mission</h3>
+                    <p><strong>Vision:</strong> To be a globally recognized center of excellence in technical education and research.</p>
+                    <p><strong>Mission:</strong> To provide quality education that transforms students into skilled professionals, innovators, and leaders who can contribute to society.</p>
+                    <div class="admin-only mt-3">
+                        <button class="btn btn-sm btn-outline-primary" onclick="editAbout()">Edit Content</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admission Section -->
+    <section id="admission-section" class="py-5" style="display: none; margin-top: 100px;">
+        <div class="container">
+            <h2 class="section-title text-center">Online Admission Process</h2>
+            
+            <div class="admission-steps">
+                <div class="step">
+                    <h4>Registration</h4>
+                    <p>Create your student account with basic information and email verification.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>Fill Application Form</h4>
+                    <p>Complete the online application form with personal, educational, and course details.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>Upload Documents</h4>
+                    <p>Upload scanned copies of required documents (photo, ID proof, marksheets).</p>
+                </div>
+                
+                <div class="step">
+                    <h4>Payment</h4>
+                    <p>Pay the application fee through online payment methods.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>Submit & Track</h4>
+                    <p>Submit your application and track its status through your student portal.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#admissionModal">Start Admission Process</button>
+            </div>
+
+            <div class="admin-only mt-5">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Admission Management</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">View Applications</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Update Status</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Download Reports</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results-section" class="py-5" style="display: none; margin-top: 100px;">
+        <div class="container">
+            <h2 class="section-title text-center">Check Your Results</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center mb-4">Enter Your Details</h4>
+                            <form id="result-form">
+                                <div class="mb-3">
+                                    <label for="rollNumber" class="form-label">Roll Number</label>
+                                    <input type="text" class="form-control" id="rollNumber" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dob" class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control" id="dob" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="semester" class="form-label">Semester</label>
+                                    <select class="form-select" id="semester" required>
+                                        <option value="">Select Semester</option>
+                                        <option value="1">Semester 1</option>
+                                        <option value="2">Semester 2</option>
+                                        <option value="3">Semester 3</option>
+                                        <option value="4">Semester 4</option>
+                                        <option value="5">Semester 5</option>
+                                        <option value="6">Semester 6</option>
+                                        <option value="7">Semester 7</option>
+                                        <option value="8">Semester 8</option>
+                                    </select>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary" onclick="generateMarksheet()">View Result</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="marksheet-container" class="mt-5" style="display: none;">
+                <div class="marksheet">
+                    <div class="marksheet-header">
+                        <h2>Sai Meer Technical University</h2>
+                        <h3>Statement of Marks</h3>
+                        <p>Bachelor of Technology - Computer Science Engineering</p>
+                        <p>Semester: <span id="ms-semester"></span> | Session: 2022-2023</p>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p><strong>Name:</strong> <span id="ms-name">Rahul Sharma</span></p>
+                            <p><strong>Father's Name:</strong> Rajesh Sharma</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Roll No:</strong> <span id="ms-roll">SMTU2023015</span></p>
+                            <p><strong>Date of Birth:</strong> 15-08-2002</p>
+                        </div>
+                    </div>
+                    
+                    <table class="marksheet-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Max Marks</th>
+                                <th>Marks Obtained</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="marks-table-body">
+                            <!-- Marks will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p><strong>Result:</strong> <span class="text-success">PASS</span></p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <p><strong>Percentage:</strong> <span id="ms-percentage">78.4%</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary" onclick="printMarksheet()">Print Marksheet</button>
+                        <button class="btn btn-success" onclick="downloadMarksheet()">Download as PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-only mt-5">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Result Management</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Upload Results</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Generate Marksheets</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary">Publish Results</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact-section" class="py-5" style="display: none; margin-top: 100px;">
+        <div class="container">
+            <h2 class="section-title text-center">Contact Us</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Get in Touch</h4>
+                            <p><i class="bi bi-geo-alt-fill"></i> 123 Technology Avenue, Tech City, State 12345, India</p>
+                            <p><i class="bi bi-telephone-fill"></i> +91 (123) 456-7890</p>
+                            <p><i class="bi bi-envelope-fill"></i> info@smtuniversity.edu.in</p>
+                            
+                            <div class="mt-4">
+                                <h5>Office Hours</h5>
+                                <p>Monday to Friday: 9:00 AM - 5:00 PM</p>
+                                <p>Saturday: 9:00 AM - 1:00 PM</p>
+                                <p>Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Send a Message</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Login Section -->
+    <section id="admin-login-section" class="py-5" style="display: none; margin-top: 100px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="admin-panel text-center">
+                        <h2><i class="bi bi-shield-lock-fill"></i> Admin Portal</h2>
+                        <p>Access the university management system</p>
+                    </div>
+                    
+                    <div class="login-form">
+                        <h4 class="text-center mb-4">Administrator Login</h4>
+                        <form id="admin-login-form">
+                            <div class="mb-3">
+                                <label for="admin-username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="admin-username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="admin-password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="admin-password" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" onclick="adminLogin()">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard Section -->
+    <section id="admin-dashboard-section" class="py-5" style="display: none; margin-top: 100px;">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2 class="section-title">Admin Dashboard</h2>
+                <button class="btn btn-outline-danger" onclick="adminLogout()">Logout</button>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="dashboard-card dashboard-card-1">
+                        <i class="bi bi-people-fill"></i>
+                        <h4>Student Management</h4>
+                        <p>Manage student records, admissions, and profiles</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="dashboard-card dashboard-card-2">
+                        <i class="bi bi-journal-text"></i>
+                        <h4>Results & Marksheets</h4>
+                        <p>Upload results and generate marksheets</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="dashboard-card dashboard-card-3">
+                        <i class="bi bi-cash-coin"></i>
+                        <h4>Fee Management</h4>
+                        <p>Manage fee collection and receipts</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="dashboard-card dashboard-card-4">
+                        <i class="bi bi-megaphone-fill"></i>
+                        <h4>Notifications</h4>
+                        <p>Send notices and announcements</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary">Add New Student</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary">Upload Results</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary">Generate Reports</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Login Section -->
+    <section id="student-login-section" class="py-5" style="display: none; margin-top: 100px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="login-form">
+                        <h4 class="text-center mb-4">Student Login</h4>
+                        <form id="student-login-form">
+                            <div class="mb-3">
+                                <label for="student-username" class="form-label">Student ID/Email</label>
+                                <input type="text" class="form-control" id="student-username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="student-password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="student-password" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Sai Meer Technical University</h4>
+                    <p>123 Technology Avenue, Tech City, State 12345, India</p>
+                    <p><i class="bi bi-telephone me-2"></i>+91 (123) 456-7890</p>
+                    <p><i class="bi bi-envelope me-2"></i>info@smtuniversity.edu.in</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" onclick="showSection('home')">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" onclick="showSection('about')">About</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" onclick="showSection('admission')">Admission</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none" onclick="showSection('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Library</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Alumni</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-uppercase mb-4">Connect With Us</h5>
+                    <div class="mb-4">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2023 Sai Meer Technical University. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="text-white text-decoration-none">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admission Modal -->
+    <div class="modal fade" id="admissionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Start Online Admission</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="course" class="form-label">Select Course</label>
+                                <select class="form-select" id="course" required>
+                                    <option value="">Choose Course</option>
+                                    <option value="btech-cs">B.Tech Computer Science</option>
+                                    <option value="btech-ee">B.Tech Electrical Engineering</option>
+                                    <option value="btech-me">B.Tech Mechanical Engineering</option>
+                                    <option value="mtech-cs">M.Tech Computer Science</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="qualification" class="form-label">Highest Qualification</label>
+                            <input type="text" class="form-control" id="qualification" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Submit Application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Show/hide sections
+        function showSection(sectionName) {
+            // Hide all sections
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('about-section').style.display = 'none';
+            document.getElementById('admission-section').style.display = 'none';
+            document.getElementById('results-section').style.display = 'none';
+            document.getElementById('contact-section').style.display = 'none';
+            document.getElementById('admin-login-section').style.display = 'none';
+            document.getElementById('admin-dashboard-section').style.display = 'none';
+            document.getElementById('student-login-section').style.display = 'none';
+            
+            // Show the requested section
+            if (sectionName === 'home') {
+                document.getElementById('home-section').style.display = 'block';
+            } else if (sectionName === 'about') {
+                document.getElementById('about-section').style.display = 'block';
+            } else if (sectionName === 'admission') {
+                document.getElementById('admission-section').style.display = 'block';
+            } else if (sectionName === 'results') {
+                document.getElementById('results-section').style.display = 'block';
+            } else if (sectionName === 'contact') {
+                document.getElementById('contact-section').style.display = 'block';
+            } else if (sectionName === 'admin-login') {
+                document.getElementById('admin-login-section').style.display = 'block';
+            } else if (sectionName === 'student-login') {
+                document.getElementById('student-login-section').style.display = 'block';
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Admin login function
+        function adminLogin() {
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+            
+            // Simple validation (in real application, this would connect to a server)
+            if (username === 'admin' && password === 'admin123') {
+                document.getElementById('admin-login-section').style.display = 'none';
+                document.getElementById('admin-dashboard-section').style.display = 'block';
+                
+                // Show admin-only elements
+                const adminElements = document.querySelectorAll('.admin-only');
+                adminElements.forEach(el => {
+                    el.style.display = 'block';
+                });
+                
+                // Change admin link to dashboard
+                document.querySelector('.admin-login-link').innerHTML = '<i class="bi bi-speedometer2"></i> Dashboard';
+                document.querySelector('.admin-login-link').setAttribute('onclick', "showSection('admin-dashboard-section')");
+            } else {
+                alert('Invalid username or password. Try admin/admin123 for demo.');
+            }
+        }
+        
+        // Admin logout function
+        function adminLogout() {
+            document.getElementById('admin-dashboard-section').style.display = 'none';
+            document.getElementById('admin-login-section').style.display = 'block';
+            document.getElementById('admin-username').value = '';
+            document.getElementById('admin-password').value = '';
+            
+            // Hide admin-only elements
+            const adminElements = document.querySelectorAll('.admin-only');
+            adminElements.forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Change admin link back to login
+            document.querySelector('.admin-login-link').innerHTML = '<i class="bi bi-shield-lock"></i> Admin';
+            document.querySelector('.admin-login-link').setAttribute('onclick', "showSection('admin-login-section')");
+        }
+        
+        // Generate marksheet function
+        function generateMarksheet() {
+            const rollNumber = document.getElementById('rollNumber').value;
+            const semester = document.getElementById('semester').value;
+            
+            if (!rollNumber || !semester) {
+                alert('Please enter roll number and select semester');
+                return;
+            }
+            
+            // Set values in marksheet
+            document.getElementById('ms-roll').textContent = rollNumber;
+            document.getElementById('ms-semester').textContent = semester;
+            
+            // Generate random marks
+            const subjects = [
+                { code: 'CS101', name: 'Data Structures', maxMarks: 100 },
+                { code: 'CS102', name: 'Algorithms', maxMarks: 100 },
+                { code: 'CS103', name: 'Database Systems', maxMarks: 100 },
+                { code: 'CS104', name: 'Computer Networks', maxMarks: 100 },
+                { code: 'CS105', name: 'Software Engineering', maxMarks: 100 }
+            ];
+            
+            const tableBody = document.getElementById('marks-table-body');
+            tableBody.innerHTML = '';
+            
+            let totalObtained = 0;
+            let totalMax = 0;
+            
+            subjects.forEach(subject => {
+                const obtained = Math.floor(Math.random() * 30) + 70; // Random between 70-100
+                totalObtained += obtained;
+                totalMax += subject.maxMarks;
+                
+                const grade = obtained >= 90 ? 'A+' : 
+                             obtained >= 80 ? 'A' : 
+                             obtained >= 70 ? 'B+' : 
+                             obtained >= 60 ? 'B' : 
+                             obtained >= 50 ? 'C' : 'F';
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${subject.code}</td>
+                    <td>${subject.name}</td>
+                    <td>${subject.maxMarks}</td>
+                    <td>${obtained}</td>
+                    <td>${grade}</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            const percentage = ((totalObtained / totalMax) * 100).toFixed(2);
+            document.getElementById('ms-percentage').textContent = `${percentage}%`;
+            
+            // Show marksheet
+            document.getElementById('marksheet-container').style.display = 'block';
+        }
+        
+        // Print marksheet function
+        function printMarksheet() {
+            const printContent = document.getElementById('marksheet-container').innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            
+            // Reload the page to restore functionality
+            location.reload();
+        }
+        
+        // Download marksheet as PDF (simulated)
+        function downloadMarksheet() {
+            alert('In a real application, this would generate and download a PDF version of your marksheet.');
+        }
+        
+        // Admin functions
+        function editNews(id) {
+            alert('Admin function: Edit news item ' + id);
+        }
+        
+        function addNews() {
+            alert('Admin function: Add new news item');
+        }
+        
+        function editAbout() {
+            alert('Admin function: Edit about page content');
+        }
+    </script>
+</body>
+</html>
